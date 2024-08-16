@@ -30,12 +30,14 @@ const ProgressBar = ({ value, size }) => {
   let styles = SIZES[size];
 
   return (
-    <Wrapper style={styles}>
-      <ProgressWrapper style={styles}>
-        <VisuallyHidden>Progress Bar</VisuallyHidden>
-        <ProgressFill style={{"--fill-percentage": value + "%"}}></ProgressFill>
-      </ProgressWrapper>
-    </Wrapper>
+    <>
+      <VisuallyHidden id='loadinglabel'>Loading:</VisuallyHidden>
+      <Wrapper role="progressbar" aria-labelledby='loadinglabel' aria-valuenow={value} style={styles}>
+        <ProgressWrapper style={styles}>
+          <ProgressFill style={{"--fill-percentage": value + "%"}} />
+        </ProgressWrapper>
+      </Wrapper>
+    </>
   )
 };
 
@@ -55,7 +57,7 @@ const ProgressWrapper = styled.div`
   overflow: hidden;
 `;
 
-const ProgressFill = styled.progress`
+const ProgressFill = styled.div`
   width: var(--fill-percentage);
   height: 100%;
   background-color: ${COLORS.primary};
